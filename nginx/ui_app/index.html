@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8ddca4933a.js" crossorigin="anonymous"></script>
+    <script src="./requests_async.js"></script>
+</head>
+<body>
+    
+    <div class="app">
+        <div class="tile">
+            <div class="container">
+                <h2 class="title">Let's level up your brand, together</h2>
+            </div>
+
+            <div class="container">
+                <form class = "box">
+                    <div class="field">
+                        <label class="inputTitle">First name</label>
+                        <input id="firstName" class="subtext" type="text" placeholder="First name">
+                    </div>
+                    
+                    <div class="field">
+                        <label class="inputTitle">Last name</label>
+                        <input id="lastName" class="subtext" type="text" placeholder="Last name">
+                    </div>
+
+                    <div class="field">
+                        <label class="inputTitle">Role</label>
+                        <input id="role" class="subtext" type="text" placeholder="Role">
+                    </div>
+                    
+                    <div class="field2">
+                        <input id="privacyPolicy" class="checkboxSquare" type="checkbox" required>
+                        <label class="subtext2">You agree to our firendly <u>privacy policy</u>.</label>
+                    </div>
+
+                    <div class="field">
+                        <button class="submit_button" onclick="sendPostRequest()">
+                            SUBMIT
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="userList">
+            <!--Display list of users-->
+        </div>
+    </div>
+
+</body>
+</html>
+

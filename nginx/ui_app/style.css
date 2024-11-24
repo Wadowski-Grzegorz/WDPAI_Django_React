@@ -1,0 +1,102 @@
+.app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Inter";
+    font-size: 14px;
+}
+
+
+.tile{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    width: 343px;
+    padding: 20px;
+    margin-bottom: 20px; 
+}
+
+.tile2{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    width: 343px;
+    padding-top : 10px;
+    padding-bottom : 10px;
+    padding-right : 20px;
+    padding-left : 20px;
+    margin-bottom: 10px; 
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    width: 100%;
+}
+
+.field{
+    display: flex;
+    height: 48px;
+    flex-direction: column;
+    row-gap: 7px;
+}
+
+.field2{
+    display:flex;
+    align-items: center;
+}
+
+
+.inputTitle{
+    font-weight: bold;
+    color: #344054;
+}
+
+.subtext{
+    width: 94%;
+    padding: 10px;
+    color: #667085;
+    border-radius: 8px;
+    border: 1px solid lightgray;
+}
+
+.subtext2{
+    padding: 10px;
+    color: #667085;
+}
+
+.subtext3{
+    font-family: "Manrope", sans-serif;
+    color: #64748B;
+}
+
+.checkboxSquare{
+    
+}
+
+
+.submit_button{
+    background-color: #7F56D9;
+    width: 100%;
+    height: 48px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.delete_button{
+    background:transparent;
+    border: none;
+    float: right;
+    scale: 1.5;
+}
+
+.single_user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
