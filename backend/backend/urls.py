@@ -8,5 +8,5 @@ def home(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('', home, name='home'),  # Add root URL handler
+    path('', home, name='home'),
 ]

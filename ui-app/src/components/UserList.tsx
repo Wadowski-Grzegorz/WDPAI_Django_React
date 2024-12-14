@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import TrashSolid from '../assets/trash_solid.svg'
-import styles from './UserForm.module.css'
+import TrashSolid from '../assets/trash_solid.svg';
 
 const UserList = () => {
     // const [users, setUsers] = useState([]);
@@ -13,66 +12,64 @@ const UserList = () => {
         role: ''
     });
 
-    // Pobieranie użytkowników z backendu
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users/')  // Aktualizuj URL w zależności od Twojego endpointu
+        axios.get('http://localhost:8000/api/users/')
             .then(response => {
-                setUsers(response.data);  // Ustawianie danych użytkowników w stanie
+                setUsers(response.data);
             })
             .catch(error => console.error('Error fetching users:', error));
     }, []);
+    
 
-    // Dodawanie użytkownika
     const handleAddUser = () => {
-        axios.post('http://localhost:8000/api/users/', newUser)  // Endpoint do dodawania użytkowników
+        axios.post('http://localhost:8000/api/users/', newUser)
             .then(response => {
-                setUsers([...users, response.data]);  // Dodanie nowego użytkownika do listy
-                setNewUser({ first_name: '', last_name: '', role: '' });  // Resetowanie formularza
+                setUsers([...users, response.data]);
+                setNewUser({ first_name: '', last_name: '', role: '' });
             })
             .catch(error => console.error('Error adding user:', error));
     };
 
-    // Usuwanie użytkownika
     const handleDeleteUser = (id: number) => {
-        axios.delete(`http://localhost:8000/api/users/${id}/`)  // Endpoint do usuwania użytkownika
+        axios.delete(`http://localhost:8000/api/users/${id}/`)
             .then(() => {
-                setUsers(users.filter(user => user.id !== id));  // Usunięcie użytkownika z listy
+                setUsers(users.filter(user => user.id !== id));
             })
             .catch(error => console.error('Error deleting user:', error));
     };
 
     return(
-        <div className={styles["app"]}>
-            <div className={styles["tile"]}>
-                <div className={styles["container"]}>
-                    <h2 className={styles["title"]}>
+        <div className="app">
+            <div className="tile">
+                <div className="container">
+                    <h2 className="title">
                         Let's level up your brand, together
                     </h2>
                 </div>
 
-                <div className={styles["container"]}>
+                <div className="container">
                     <form onSubmit={(e) => {e.preventDefault(); handleAddUser();}} className="box">
-                        <div className={styles["field"]}>
-                            <label className={styles["inputTitle"]}>First name:</label>
-                            <input  className={styles["subtext"]} 
+                        <div className="field">
+                            <label className="inputTitle">First name:</label>
+                            <input  className="subtext" 
                                     value={newUser.first_name} 
                                     onChange={ (e) => setNewUser({ ...newUser, first_name: e.target.value }) } 
                                     type="text" 
                                     placeholder="First name"/>
                         </div>
 
-                        <div className={styles["field"]}>
-                            <label className={styles["inputTitle"]}>Last name:</label>
-                            <input  className={styles["subtext"]} 
+                        <div className="field">
+                            <label className="inputTitle">Last name:</label>
+                            <input  className="subtext" 
                                     value={newUser.last_name} 
                                     onChange={ (e) => setNewUser({ ...newUser, last_name: e.target.value }) } 
                                     type="text" 
                                     placeholder="Last name"/>
                         </div>
 
-                        <div className={styles["field"]}>
-                            <label className={styles["inputTitle"]}>Role:</label>
-                            <input  className={styles["subtext"]} 
+                        <div className="field">
+                            <label className="inputTitle">Role:</label>
+                            <input  className="subtext" 
                                     value={newUser.role} 
                                     onChange={ (e) => setNewUser({ ...newUser, role: e.target.value }) } 
                                     type="text" 
@@ -80,15 +77,15 @@ const UserList = () => {
                         </div>
 
                         
-                        <div className={styles["field2"]}>
-                            <label className={styles["subtext2"]}>
+                        <div className="field2">
+                            <label className="subtext2">
                                 <input type="checkbox" required/>
                                 You agree to our friendly <u>privacy policy</u>.
                             </label>
                         </div>
 
-                        <div className={styles["field"]}>
-                            <button className={styles["submit_button"]} type="submit">
+                        <div className="field">
+                            <button className="submit_button" type="submit">
                                 SUBMIT
                             </button>
                         </div>
@@ -97,18 +94,18 @@ const UserList = () => {
             </div>
 
             <div>
-                <div className={styles["list-user"]}>
+                <div className="list-user">
                     {users.map( (user) => 
-                                <div className={styles["tile2"]} key={user.id}>
-                                    <div className={styles["single_user"]}>
-                                        <div className={styles["fieldUser"]}>
+                                <div className="tile2" key={user.id}>
+                                    <div className="single_user">
+                                        <div className="fieldUser">
                                             {user.first_name} {user.last_name}
-                                            <div className={styles["subtext3"]}>
+                                            <div className="subtext3">
                                                 {user.role}
                                             </div>
                                         </div>
 
-                                        <button className={styles["delete_button"]} 
+                                        <button className="delete_button" 
                                             onClick={() => handleDeleteUser(user.id)}>
                                             <img src={TrashSolid} alt="Delete"/>
                                         </button>
