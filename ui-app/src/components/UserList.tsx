@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import TrashSolid from '../assets/trash_solid.svg';
 
+// TODO: keep track of checkbox so it resets
+
 const UserList = () => {
     // const [users, setUsers] = useState([]);
     const [users, setUsers] = useState<Array<{ id: number, first_name: string, last_name: string, role: string }>>([]);
@@ -77,7 +79,7 @@ const UserList = () => {
                         </div>
 
                         
-                        <div className="field2">
+                        <div className="field_small">
                             <label className="subtext2">
                                 <input type="checkbox" required/>
                                 You agree to our friendly <u>privacy policy</u>.

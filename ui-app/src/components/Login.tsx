@@ -1,28 +1,76 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
-//     // TODO każde pola jako oddzielny stan
-//     const [credentials, setCredentials] = useState({ username: '', password: '' });
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-//     const handleLogin = async (e: React.FormEvent) => {
-//         // TODO zablokuj domyślną funkcjonalność SUBMIT formularza
-//         try {
-//             const response = await axios.post('/api/login/', credentials);
-//             // TODO zapisz a session storage, nie w localstorage!
-//             localStorage.setItem('token', response.data.access);
-//             alert('Login successful!');
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     };
+    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUsername(e.target.value);
+    }
 
-    return (
-        <h1>Login</h1>
-//         <form onSubmit={handleLogin}>
-//             # TODO FORMULARZ wraz z obsługą pól
-//         </form>
-    );
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    }
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:8000/api/login/', {username, password});
+
+            setUsername('');
+            setPassword('');
+
+            // TODO zapisz a session storage, nie w localstorage!
+            localStorage.setItem('token', response.data.access);
+            alert('Login successful!');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+return (
+    <>
+        <div className="app">
+        <div className="tile">
+            <div className="container">
+                <h2 className="title">
+                    Login
+                </h2>
+            </div>
+
+            <div className="container">
+                <form onSubmit={handleLogin} className="box">
+                    <div className="field">
+                        <label className="inputTitle">User name:</label>
+                        <input  className="subtext" 
+                                value={username} 
+                                onChange={handleUsernameChange}
+                                type="text" 
+                                placeholder="John Doe"/>
+                    </div>
+
+                    <div className="field">
+                        <label className="inputTitle">Password:</label>
+                        <input  className="subtext"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                type="password"
+                                placeholder="min 8 characters"/>
+                    </div>
+
+                    <div className="field">
+                        <button className="submit_button" type="submit">
+                            SUBMIT
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </>
+);
 };
 
 export default Login;
