@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+// import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
-// TODO: del old commends/ code here and css
-// messages: password, email
-// navigation: if login move to home/ userlist
 
 const Register = () => {
     // const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -11,6 +11,8 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    // const navigate = useNavigate();
 
     const [errorMessages, setErrorMessages] = useState({ 
         email: '', 
@@ -35,7 +37,9 @@ const Register = () => {
         setConfirmPassword(e.target.value);
     }
 
-
+    const notify = (message: String) => {
+        toast(message);
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -70,11 +74,12 @@ const Register = () => {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
-            setErrorMessages({ email: '', password: '', confirmPassword: '' })
+            setErrorMessages({ email: '', password: '', confirmPassword: '' });
 
-            // TODO dodaj notyfikację zamiast alertu
-            alert('Registration successful!'); 
-
+            // alert('Registration successful!'); 
+            notify('Registration successful!')
+            // navigate("/login"); // del cause notify can be seen
+            
         } catch (error) {
             console.error(error);
         }
@@ -99,7 +104,8 @@ const Register = () => {
                                     value={username} 
                                     onChange={handleUsernameChange}
                                     type="text" 
-                                    placeholder="John Doe"/>
+                                    placeholder="John Doe"
+                                    autoComplete="off"/>
                         </div>
 
                         <div className="field">
@@ -108,7 +114,8 @@ const Register = () => {
                                     value={email} 
                                     onChange={handleEmailChange}
                                     type="text" 
-                                    placeholder="myMail@example.com"/>
+                                    placeholder="myMail@example.com"
+                                    autoComplete="off"/>
                         </div>
 
                         <div className="field">
@@ -121,7 +128,8 @@ const Register = () => {
                                     value={password}
                                     onChange={handlePasswordChange}
                                     type="password"
-                                    placeholder="min 8 characters"/>
+                                    placeholder="min 8 characters"
+                                    autoComplete="off"/>
                         </div>
 
                         <div className="field">
@@ -134,7 +142,8 @@ const Register = () => {
                                     value={confirmPassword}
                                     onChange={handleConfirmPasswordChange}
                                     type="password"
-                                    placeholder="min 8 characters"/>
+                                    placeholder="min 8 characters"
+                                    autoComplete="off"/>
                         </div>
 
                         
@@ -154,6 +163,8 @@ const Register = () => {
                 </div>
             </div>
             </div>
+
+            <ToastContainer/>
         </>
     );
 };

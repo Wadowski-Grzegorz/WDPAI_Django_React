@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -24,9 +27,11 @@ const Login = () => {
 
             sessionStorage.setItem('token', response.data.access);
 
-            console.log("myToken: ", sessionStorage.getItem('token'))
+            // console.log("myToken: ", sessionStorage.getItem('token'));
             
             alert('Login successful!');
+            navigate("/users");
+
         } catch (error) {
             console.error(error);
         }
@@ -50,7 +55,8 @@ return (
                                 value={username} 
                                 onChange={handleUsernameChange}
                                 type="text" 
-                                placeholder="John Doe"/>
+                                placeholder="John Doe"
+                                autoComplete="username"/>
                     </div>
 
                     <div className="field">
@@ -59,7 +65,8 @@ return (
                                 value={password}
                                 onChange={handlePasswordChange}
                                 type="password"
-                                placeholder="min 8 characters"/>
+                                placeholder="min 8 characters"
+                                autoComplete="current-password"/>
                     </div>
 
                     <div className="field">

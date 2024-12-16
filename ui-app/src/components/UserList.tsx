@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import TrashSolid from '../assets/trash_solid.svg';
-
-// TODO: keep track of checkbox so it resets
-// redirect to login/ register
 
 const UserList = () => {
     // const [users, setUsers] = useState([]);
@@ -14,11 +12,18 @@ const UserList = () => {
         last_name: '',
         role: ''
     });
+    const [checkbox, setCheckbox] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
+        if(!token){
+            navigate("/register")
+        }
+
         axios.get(
-            'http://localhost:8000/api/users/',
+            'http://localhost:8000/api/business-users/',
             {
                 headers:{
                     'Authorization': `Bearer ${token}`
@@ -34,7 +39,7 @@ const UserList = () => {
 
     const handleAddUser = () => {
         const token = sessionStorage.getItem('token');
-        axios.post('http://localhost:8000/api/users/', 
+        axios.post('http://localhost:8000/api/business-users/', 
             newUser,
             {
                 headers:{
@@ -46,6 +51,7 @@ const UserList = () => {
             .then(response => {
                 setUsers([...users, response.data]);
                 setNewUser({ first_name: '', last_name: '', role: '' });
+                setCheckbox(false);
             })
             .catch(error => console.error('Error adding user:', error));
     };
@@ -53,7 +59,7 @@ const UserList = () => {
     const handleDeleteUser = (id: number) => {
         const token = sessionStorage.getItem('token');
         axios.delete(
-            `http://localhost:8000/api/users/${id}/`,
+            `http://localhost:8000/api/business-users/${id}/`,
             {
                 headers:{
                     'Authorization': `Bearer ${token}`
@@ -107,7 +113,11 @@ const UserList = () => {
                         
                         <div className="field_small">
                             <label className="subtext2">
-                                <input type="checkbox" required/>
+                                <input type="checkbox" 
+                                checked={checkbox}
+                                onChange={(e) => setCheckbox(e.target.checked)}
+                                required
+                                />
                                 You agree to our friendly <u>privacy policy</u>.
                             </label>
                         </div>
