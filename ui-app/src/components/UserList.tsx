@@ -4,6 +4,7 @@ import axios from 'axios';
 import TrashSolid from '../assets/trash_solid.svg';
 
 // TODO: keep track of checkbox so it resets
+// redirect to login/ register
 
 const UserList = () => {
     // const [users, setUsers] = useState([]);
@@ -15,7 +16,15 @@ const UserList = () => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users/')
+        const token = sessionStorage.getItem('token');
+        axios.get(
+            'http://localhost:8000/api/users/',
+            {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                }
+            }    
+        )
             .then(response => {
                 setUsers(response.data);
             })
@@ -24,7 +33,16 @@ const UserList = () => {
     
 
     const handleAddUser = () => {
-        axios.post('http://localhost:8000/api/users/', newUser)
+        const token = sessionStorage.getItem('token');
+        axios.post('http://localhost:8000/api/users/', 
+            newUser,
+            {
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
             .then(response => {
                 setUsers([...users, response.data]);
                 setNewUser({ first_name: '', last_name: '', role: '' });
@@ -33,7 +51,15 @@ const UserList = () => {
     };
 
     const handleDeleteUser = (id: number) => {
-        axios.delete(`http://localhost:8000/api/users/${id}/`)
+        const token = sessionStorage.getItem('token');
+        axios.delete(
+            `http://localhost:8000/api/users/${id}/`,
+            {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
             .then(() => {
                 setUsers(users.filter(user => user.id !== id));
             })

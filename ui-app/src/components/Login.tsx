@@ -22,8 +22,10 @@ const Login = () => {
             setUsername('');
             setPassword('');
 
-            // TODO zapisz a session storage, nie w localstorage!
-            localStorage.setItem('token', response.data.access);
+            sessionStorage.setItem('token', response.data.access);
+
+            console.log("myToken: ", sessionStorage.getItem('token'))
+            
             alert('Login successful!');
         } catch (error) {
             console.error(error);

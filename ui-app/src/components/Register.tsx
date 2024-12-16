@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // TODO: del old commends/ code here and css
 // messages: password, email
+// navigation: if login move to home/ userlist
 
 const Register = () => {
     // const [formData, setFormData] = useState({ username: '', email: '', password: '' });

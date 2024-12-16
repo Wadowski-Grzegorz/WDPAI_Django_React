@@ -12,8 +12,8 @@ from .serializers import RegisterSerializer, SystemUserSerializer
 from django.contrib.auth import get_user_model
 
 @api_view(['GET', 'POST'])
-# @permission_classes([IsAuthenticated])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
+# @permission_classes([AllowAny])
 def business_user_list(request):
     if request.method == 'GET':
         users = BusinessUser.objects.all()
@@ -29,8 +29,8 @@ def business_user_list(request):
 
 
 @api_view(['DELETE'])
-# @permission_classes([IsAuthenticated])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
+# @permission_classes([AllowAny])
 def business_user_delete(request, pk):
     try:
         user = BusinessUser.objects.get(pk=pk)
